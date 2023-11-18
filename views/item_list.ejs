@@ -9,11 +9,16 @@
   <h1><%= title %></h1>
   <%- include('./sidebar') %>
 
-  <p>The inventory has the following record counts:</p>
-
   <ul>
-    <li><strong>Categories:</strong> <%= category_count %></li>
-    <li><strong>Items:</strong> <%= item_count %></li>
+    <% if (item_list.length) { %>
+      <% item_list.forEach(item => { %>
+        <li><a href=<%= item.url %>><%= item.name %> | <%= item.price %></a></li>
+      <% }) %>
+    <% } else { %>
+      <li>There are no items.</li>
+    <% } %>
+     
+
   </ul>
 </body>
 </html>

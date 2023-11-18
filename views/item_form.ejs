@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+</head>
+<body>
+  <h1><%= title %></h1>
+  <%- include('./sidebar') %>
+
+  <form action="" method="POST">
+    <div class="form-group">
+      <label for="name">Item:</label>
+      <input type="text" id="name" name="name" required="true"
+      value=<%= item === false ? '' : item.name %>>
+    </div>
+    <div class="form-group">
+      <label for="description">Description:</label>
+      <textarea name="description" id="description" cols="30" rows="10"
+      required="true"><%= item === false ? '' : item.description %></textarea>
+    </div>
+    <div class="form-group">
+      <label for="category">Category:</label>
+      <select name="category" id="category" placeholder="Select
+      Category" required="true">
+        <% categories.sort(function (a, b) {
+          let textA = a.name.toUpperCase();
+          let textB = b.name.toUpperCase();
+          return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+        }); %>
+        <% categories.forEach(category => { %>
+          <% if (item) { %>
+            <option value="<%= category._id %>" selected="<%=
+            category._id.toString() === item.category._id.toString() ?
+            'selected' : false %>"><%= category.name %></option>
+          <% } else { %>
+            <option value="<%= category._id %>"><%= category.name
+            %></option>
+          <% } %>
+        <% }); %>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="price">Price: $</label>
+      <input type="number" name="price" id="price" required="true"
+      min="1" value=<%= item === false ? '' : item.price %>>
+    </div>
+    <div class="form-group">
+      <label for="number_in_stock">Number in stock:</label>
+      <input type="number" name="number_in_stock" id="number_in_stock"
+      required="true" min="0" value=<%= item === false ? '' : item.number_in_stock %>>
+    </div>
+    <button type="submit">Submit</button>
+  </form>
+
+  <% if (errors) { %>
+    <ul>
+      <% errors.forEach(errors => { %>
+        <li><%= error.msg %></li>
+      <% }) %>
+    </ul>
+  <% } %>
+  
+</body>
+</html>

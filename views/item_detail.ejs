@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+</head>
+<body>
+  <h1><%= item.name %></h1>
+  <%- include('./sidebar') %>
+
+  <p><%= item.description %></p>
+
+  <p><%= item.name %> is a character of the <%= item.category.name %> element.</p>
+
+  <p>Price: <%= item.price %></p>
+  <p>Quantity available: <%= item.number_in_stock %></p>
+
+  <hr>
+  <p>
+    <a href="<%= item.url+'/delete' %>">Delete item</a>
+  </p>
+  <p>
+    <a href="<%= item.url+'/update' %>">Update item</a>
+  </p>
+  
+</body>
+</html>
